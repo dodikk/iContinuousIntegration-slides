@@ -1,0 +1,18 @@
+https://github.com/magicalpanda/MagicalRecord/pull/126
+
+
+>>> magicalpanda replied January 03, 2012
+BTW, thanks for your pull request. I have't had time to review it all yet, but most of it looks good. 
+
+Saul Mora
+Founding Panda
+saul@magicalpanda.com
+===========================
+
+
+appunite / CLCascade has accepted our patch
+https://github.com/appunite/CLCascade/commit/1f595e3d756ea75b9d8f4efdf34a589a7dc4efeb
+===========================
+
+
+

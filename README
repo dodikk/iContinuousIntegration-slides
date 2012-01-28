@@ -1,0 +1,12 @@
+A presentation of iOS continuous integration techniques.
+Written with the help of OpenOffice.org
+License : AFL ( Academic Free License ).
+=====================================================================
+
+It describes a full development cycle :
+   * libraries creation and usage
+   * unit testing with GHUnit
+   * "universal binary" library creation and usage
+   * building and deploying the project
+=====================================================================
+

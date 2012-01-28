@@ -1,0 +1,22 @@
+https://github.com/magicalpanda/MagicalRecord/issues/90#issuecomment-3337483 
+
+>>> magicalpanda commented November 30, 2011
+I'm not sure what the benefits are to everyone...
+Could you elaborate as to why you (or anyone) would want to do this?
+I'm truly curious as to the benefits, or hindrances...
+===========================
+
+
+
+>>> tonyxiao commented January 13, 2012
+Actually I just realized, the perfect solution to the problem I posted on Jan 3 is to use git submodule, it keeps things properly in sync perfectly! Far as I'm concerned this reduces the value of a static library target tremendously, 
+
+[!!!] I don't really care to compile from source. [!!!] 
+===========================
+
+
+
+ >>> magicalpanda commented December 11, 2011
+So, my take on this is, as long as I can still use the Source Code approach, I'm ok with having a separate target in the project that dumps out a static library
+===========================
+

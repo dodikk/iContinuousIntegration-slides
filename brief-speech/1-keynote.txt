@@ -1,0 +1,2 @@
+1. Key differences between mobile CI and Desktop CI.
+2. Mobile deployment pitfalls.   *  beta "ad-hoc builds"   * "apple enterprise program" basics3. Up and running jobs   * build   * deployment   * unit testing   * coverage   * static analyzer4. Problems   * coverage is collected not from all projects   * coverage report data mining   * mail notifications do not get sent with corporate mail (+1 gmail account?)5. TODO   * UIAutomation/ZucchiniFramework

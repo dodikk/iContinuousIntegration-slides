@@ -1,0 +1,61 @@
+vnc://10.38.10.234
+10.38.10.234:8080
+=============================
+
+1. Key differences between mobile CI and Desktop CI.
+Подобно разработке под мобильные устройства CI для них имеет свои особенности. Главным отличием является тот факт что традиционные приложения можно запускать на той же архитектуре, на которой ведется разработка. 
+В случае iOS существует еще один слой в виде device либо simulator. Кроме того, iOS запрещает доступ к файловой системе не взломанного устройства.
+
+Таким образом, имеется препятствие для автоматизации задач чуть более сложных, нежели простая сборка.
+
+
+2. Mobile deployment pitfalls.
+   Для установки программы на iDevice необходимо снабдить ее цифровой подписью. Существует 3 типа подписей : 
+   * Distribution сертификат
+	Для AppStore deployment. 99$ в год.   * "apple enterprise program" basics
+	Неограниченное количество устройств. Не для AppStore. 299$/год
+   *  beta "ad-hoc builds"
+	Подпись для разработки и тестирования. Максимум 100 устройств.
+
+На данный момент мы работаем только с ad-hoc deployment.
+Для того чтобы поставить приложение можно использовать
+   * iTunes синхронизацию
+   * xCode organizer
+   * testflightapp.com (аналог app-store для тестовых сборок)
+   * самодельный аналог testflightapp.com
+
+
+3. Up and running jobs
+Каждый CI сервер состоит из 2х частей - master (определяет очередность выполнения задач и предоставляет web interface ) и slave ( на нем выполняются задачи ). На данный момент это одно и тот же железо (MacMini).
+
+На данный момент у нас автоматизированы следующие задачи : 
+   * build
+	xCode IDE имеет консольный интерфейс подобный devenw у MS Visual Studio.
+	Уже есть plug-in для jenkins
+	Показать сборку/запуск проекта.
+   * deployment
+	загрузка собранного приложения в testflightapp.com средствами curl    * unit testing
+	Библиотека от Apple + script для преобразования в JUnit XML.    * coverage
+	gcov + script для преобразования в XML   * static analyzer
+Jenkins собирает статистику по последним трем параметрам.
+
+4. Problems   * coverage is collected not from all projects
+	script не учитывает проекты, для которых ВООБЩЕ не написано тестов. Это, как правило, GUI компоненты.
+   * coverage report data mining
+	я не знаю что делать со статистикой, собранной с помощью Jenkins.   * mail notifications do not get sent with corporate mail (+1 gmail account?)
+5. TODO   * UIAutomation/ZucchiniFramework
+	iOS profiler позволяет записывать и воспроизводить действия пользователя подобно макросам в MS Office. ZucchiniFramework позволяет работать в стиле BDD. Похож на approvals для .NET
+
+Аналоги для .NET : 
+StoryQ
+specflow
+cucumber (may require IronRuby)
+
+==========================================================
+curl http://testflightapp.com/api/builds.json \
+-F file=@$IPA_FILE \
+-F api_token='a3620a9760dc97411328bc73864c9a82_Mzk2NDIxMjAxMi0wNC0xMyAwNDowNzozMS42MDQ2NTQ' \
+-F team_token='9a4cf26c2ba6dab0ae956567f92fc0c0_ODA1NzEyMDEyLTA0LTEzIDA0OjEzOjM5LjA5OTQ0Nw' \
+-F notes='Built by Hudson' \
+-F notify=True \
+-F distribution_lists='iPad2-users, iPad3-users'
